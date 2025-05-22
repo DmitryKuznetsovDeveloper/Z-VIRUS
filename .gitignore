@@ -1,0 +1,63 @@
+# Unity default
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+[Mm]emoryCaptures/
+sysinfo.txt
+
+# Ignore local .meta only if asset is also ignored
+!Assets/**/*.meta
+
+# Rider/JetBrains
+.idea/
+*.sln
+*.csproj
+*.unityproj
+*.user
+*.suo
+*.pidb
+*.booproj
+*.svd
+*.opendb
+*.VC.db
+*.pdb
+*.mdb
+.vs/
+.vsconfig
+
+# VSCode
+.vscode/
+
+# Android/Gradle
+.gradle/
+*.apk
+*.aab
+
+# Unity crash reports
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+
+# Addressables (optional)
+Assets/AddressableAssetsData/**/*.bin*
+Assets/StreamingAssets/aa.meta
+Assets/StreamingAssets/aa/*
+
+# Asset Store Tools (optional)
+# Assets/AssetStoreTools*
+
+# Other
+ExportedObj/
+.consulo/
+*.tmp
+*.userprefs
+*.unitypackage
+*.assetbundle
+*.manifest
+*.db
+ProjectSettings/*.backup
+
