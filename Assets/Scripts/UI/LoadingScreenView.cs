@@ -6,7 +6,7 @@ using Cysharp.Threading.Tasks;
 
 namespace UI
 {
-    public class LoadingScreenView : MonoBehaviour
+    public sealed class LoadingScreenView : MonoBehaviour
     {
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private Slider _slider;

@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Installers
 {
-    public class LoadingInstaller : MonoInstaller
+    public sealed class LoadingInstaller : MonoInstaller
     {
         [SerializeField] private LoadingScreenView _loadingScreenView;
 

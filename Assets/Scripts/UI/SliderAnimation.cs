@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace UI
 {
-    public class SliderAnimation : MonoBehaviour
+    public sealed class SliderAnimation : MonoBehaviour
     {
         [Header("Slider Settings")]
         [SerializeField] private TMP_Text _loadingLabel;

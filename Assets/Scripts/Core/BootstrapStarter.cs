@@ -3,7 +3,7 @@ using Zenject;
 
 namespace Core
 {
-    public class BootstrapStarter : MonoBehaviour
+    public sealed class BootstrapStarter : MonoBehaviour
     {
         private SceneLoader _sceneLoader;
 

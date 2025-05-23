@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 namespace Core
 {
-    public class SceneLoader
+    public sealed class SceneLoader
     {
         private readonly LoadingScreenView _loadingScreen;
 

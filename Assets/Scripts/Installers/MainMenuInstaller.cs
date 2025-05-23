@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Installers
 {
-    public class MainMenuInstaller : MonoInstaller
+    public sealed class MainMenuInstaller : MonoInstaller
     {
         [SerializeField] private Button _btn;
         private SceneLoader _sceneLoader;
