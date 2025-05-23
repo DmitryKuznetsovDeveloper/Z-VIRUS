@@ -31,9 +31,8 @@ namespace Core
 
             _loadingScreen.SetProgressAnimated(1f);
             await UniTask.Delay(300);
-            _loadingScreen.SetVisible(false);
-
             operation.allowSceneActivation = true;
+            _loadingScreen.SetVisible(false);
         }
     }
 }

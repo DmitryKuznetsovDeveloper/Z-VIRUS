@@ -26,13 +26,13 @@ namespace UI
             {
                 gameObject.SetActive(true);
                 _canvasGroup.blocksRaycasts = true;
-                _canvasGroup.DOFade(1f, 0.4f);
+                _canvasGroup.DOFade(1f, 0.2f);
                 _isVisible = true;
                 StartBackgroundLoop().Forget();
             }
             else
             {
-                _canvasGroup.DOFade(0f, 0.4f).OnComplete(() =>
+                _canvasGroup.DOFade(0f, 0.2f).OnComplete(() =>
                 {
                     _canvasGroup.blocksRaycasts = false;
                     gameObject.SetActive(false);
