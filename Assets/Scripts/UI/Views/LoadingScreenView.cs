@@ -1,13 +1,16 @@
-﻿using DG.Tweening;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Cysharp.Threading.Tasks;
 
-namespace UI
+namespace UI.Views
 {
     public sealed class LoadingScreenView : MonoBehaviour
     {
+        [SerializeField] private TMP_Text _loadingText;
+        [SerializeField] private TMP_Text _pressAnyKeyText;
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private Slider _slider;
         [SerializeField] private Image _backgroundImage;
@@ -24,6 +27,7 @@ namespace UI
         {
             if (visible)
             {
+                ResetPressAnyKeyLabel();
                 gameObject.SetActive(true);
                 _canvasGroup.blocksRaycasts = true;
                 _canvasGroup.DOFade(1f, 0.2f);
@@ -51,9 +55,21 @@ namespace UI
         {
             _progressTween?.Kill();
             _progressTween = _slider
-                .DOValue(value, 1f)
-                .SetEase(Ease.Linear)
+                .DOValue(value, 0.24f)
+                .SetEase(Ease.OutQuad)
                 .SetUpdate(true);
+        }
+        
+        public void ShowPressAnyKey()
+        {
+            _loadingText.DOFade(0, 0.2f).SetEase(Ease.Linear).From(1);
+            _pressAnyKeyText.DOFade(1f, 0.4f).From(0).SetEase(Ease.Linear);
+        }
+
+        private void ResetPressAnyKeyLabel()
+        {
+            _pressAnyKeyText.DOFade(0f, 0f).From(0);
+            _loadingText.DOFade(1f, 0f).From(1);
         }
 
         private async UniTaskVoid StartBackgroundLoop()

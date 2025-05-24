@@ -10,6 +10,7 @@ namespace Installers
         public override void InstallBindings()
         {
             Container.Bind<SceneLoader>().AsSingle();
+            Container.Bind<GameExitService>().AsSingle();
         }
     }
 }

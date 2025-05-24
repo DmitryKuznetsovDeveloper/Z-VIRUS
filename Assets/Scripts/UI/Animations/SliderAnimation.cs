@@ -2,12 +2,11 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
-namespace UI
+namespace UI.Animations
 {
     public sealed class SliderAnimation : MonoBehaviour
     {
         [Header("Slider Settings")]
-        [SerializeField] private TMP_Text _loadingLabel;
         [SerializeField] private RectTransform _decorMove;
         [SerializeField] private CanvasGroup _gradientCanvasGroup;
         [SerializeField] private RectTransform _gradientRectTransform;
@@ -28,23 +27,14 @@ namespace UI
         {
             _sequence = DOTween.Sequence().SetUpdate(true).SetAutoKill(false).SetEase(_easeSlider).SetLoops(-1, LoopType.Restart);
             _sequence.SetLink(gameObject);
-
-            // Появление
             _sequence.Append(_gradientCanvasGroup.DOFade(1, _durationSlider).From(0f));
-            _sequence.Join(_loadingLabel.DOFade(1f, _durationSlider).From(0f));
             _sequence.Join(_gradientRectTransform.DOAnchorMax(_endGradientAnchorsMax, _durationSlider).From(_startGradientAnchorsMax));
-
-            // Смещение градиента и декора
             _sequence.Append(_gradientRectTransform.DOAnchorMin(_endGradientAnchorsMin, _durationSlider)
                 .From(_startGradientAnchorsMin)
                 .SetDelay(_delayGradientSlider));
-
             _sequence.Join(_decorMove.DOAnchorMin(_endDecorMove, _durationSlider).From(_startDecorMove));
             _sequence.Join(_decorMove.DOAnchorMax(_endDecorMove, _durationSlider).From(_startDecorMove));
             _sequence.Join(_decorMove.DOPivot(_endDecorMove, _durationSlider).From(_startDecorMove));
-
-            // Исчезновение
-            _sequence.Join(_loadingLabel.DOFade(0f, _durationSlider).SetDelay(_delayGradientSlider));
             _sequence.Join(_gradientCanvasGroup.DOFade(0f, _durationSlider));
 
             _sequence.SetUpdate(true);

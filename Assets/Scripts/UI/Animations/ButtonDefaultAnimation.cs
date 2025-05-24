@@ -1,11 +1,11 @@
 ﻿using System;
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using DG.Tweening;
+using TMPro;
+using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-namespace UI
+namespace UI.Animations
 {
     public sealed class ButtonDefaultAnimation : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler
     {
@@ -16,30 +16,23 @@ namespace UI
         
         private Vector3 _originalScale;
         private enum ButtonVisualState { Normal, Pressed }
-        private void Awake()
-        {
-            _originalScale = transform.localScale;
-            SetVisualState(ButtonVisualState.Normal);
-        }
+        private void Awake() => SetVisualState(ButtonVisualState.Normal);
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            transform.DOScale(_style.PressedScale, _style.AnimationDuration).SetEase(Ease.OutQuad);
+            transform.DOScale(_style.PressedScale, _style.AnimationDuration)
+                .From(1)
+                .SetLoops(2,LoopType.Yoyo)
+                .SetEase(Ease.InOutQuad)
+                .SetUpdate(true)
+                .SetLink(gameObject);
             SetVisualState(ButtonVisualState.Pressed);
         }
 
-        public void OnPointerUp(PointerEventData eventData)
-        {
-            transform.DOScale(_originalScale, _style.AnimationDuration).SetEase(Ease.OutBack);
-            SetVisualState(ButtonVisualState.Normal);
-        }
+        public void OnPointerUp(PointerEventData eventData) => SetVisualState(ButtonVisualState.Normal);
 
-        public void OnPointerExit(PointerEventData eventData)
-        {
-            transform.DOScale(_originalScale, _style.AnimationDuration).SetEase(Ease.OutBack);
-            SetVisualState(ButtonVisualState.Normal);
-        }
-        
+        public void OnPointerExit(PointerEventData eventData) => SetVisualState(ButtonVisualState.Normal);
+
         private void SetVisualState(ButtonVisualState state)
         {
             switch (state)
