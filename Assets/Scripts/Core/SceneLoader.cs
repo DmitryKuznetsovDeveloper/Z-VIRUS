@@ -1,5 +1,4 @@
 ﻿using Cysharp.Threading.Tasks;
-using UI;
 using UI.Views;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -34,7 +33,7 @@ namespace Core
             await UniTask.Delay(300);
             
             _loadingScreen.ShowPressAnyKey();
-            await UniTask.WaitUntil(() => Input.anyKeyDown);
+            await UniTask.WaitUntil(() => UnityEngine.Input.anyKeyDown);
             operation.allowSceneActivation = true;
             await UniTask.NextFrame();
             _loadingScreen.SetVisible(false);
