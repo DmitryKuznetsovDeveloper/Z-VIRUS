@@ -58,15 +58,7 @@ namespace Input
             _shoot.performed += _ => _shootStream.Value = true;
             _shoot.canceled += _ => _shootStream.Value = false;
         }
-
-        public void Disable()
-        {
-            _move.Disable();
-            _look.Disable();
-            _sprint.Disable();
-            _shoot.Disable();
-        }
-
+        
         public void Initialize()
         {
             _move.Enable();
@@ -86,6 +78,14 @@ namespace Input
             _lookStream.Dispose();
             _sprintStream.Dispose();
             _shootStream.Dispose();
+        }
+        
+        private void Disable()
+        {
+            _move.Disable();
+            _look.Disable();
+            _sprint.Disable();
+            _shoot.Disable();
         }
     }
 }
