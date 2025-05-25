@@ -37,6 +37,14 @@
       "dependencies": {},
       "hash": "9d51dfcc84cad2ccc5ea1833b5f33e073ce2ac56"
     },
+    "com.kybernetik.animancer": {
+      "version": "file:com.kybernetik.animancer",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "com.unity.modules.animation": "1.0.0"
+      }
+    },
     "com.unity.2d.animation": {
       "version": "10.1.4",
       "depth": 1,
