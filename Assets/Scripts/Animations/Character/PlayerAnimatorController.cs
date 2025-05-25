@@ -10,8 +10,10 @@ namespace Animations.Character
     [RequireComponent(typeof(AnimancerComponent))]
     public class PlayerAnimatorController : MonoBehaviour
     {
-        [SerializeField] private MixerTransition2D _movementMixer;
+        [SerializeField] private AvatarMask _shootMask;
+        [SerializeField] private ClipTransition _idle;
         [SerializeField] private ClipTransition _shootClip;
+        [SerializeField] private MixerTransition2D _movementMixer;
 
         private AnimancerComponent _animancer;
         private MixerState<Vector2> _moveState;
@@ -31,16 +33,20 @@ namespace Animations.Character
 
             // Движение
             _moveState = _movementMixer.CreateState();
-            _animancer.Layers[0].Play(_moveState);
+            _animancer.Layers[0].Play(_idle); // стартуем с Idle
 
-            // Слой выстрела
+            // Слой выстрела с маской
             _shootLayer = _animancer.Layers[1];
             _shootLayer.Weight = 1f;
-            _shootLayer.IsAdditive = false; // true если Additive, но обычно false
+            _shootLayer.IsAdditive = true;
+            _shootLayer.Mask = _shootMask; // ✅ применяем маску
         }
+
 
         private void OnEnable()
         {
+            _animancer.Animator.applyRootMotion = true;
+            
             // Подписка на инпут
             _moveSub = _input.MoveStream
                 .Subscribe(OnMove);
@@ -60,27 +66,27 @@ namespace Animations.Character
         {
             if (input.sqrMagnitude < 0.01f)
             {
-                _moveState.IsPlaying = false;
+                if (!_idle.State.IsPlaying)
+                    _animancer.Play(_idle);
                 return;
             }
 
             input.Normalize();
-            _smoothedInput = Vector2.Lerp(_smoothedInput, input, Time.deltaTime * 10f);
-            _moveState.Parameter = _smoothedInput;
-            _moveState.IsPlaying = true;
-        }
+            _moveState.Parameter = input;
 
+            if (!_moveState.IsPlaying)
+                _animancer.Play(_moveState);
+        }
+        
         private void PlayShoot()
         {
             var state = _shootLayer.Play(_shootClip);
-
-            var events = state.Events(_shootClip); // ← получить EventSequence по ключу
+            var events = state.Events(_shootClip);
 
             events.NormalizedEndTime = 1f;
             events.OnEnd = null;
             events.OnEnd += () => _shootLayer.Stop();
         }
-
 
     }
 }
