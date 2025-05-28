@@ -1,4 +1,3 @@
-using UI;
 using UI.Views;
 using UnityEngine;
 using Zenject;
