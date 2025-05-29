@@ -1,34 +1,58 @@
 ﻿using System;
+using CharacterInput;
 using R3;
 using UnityEngine.InputSystem;
 using Zenject;
-namespace CharacterInput
+
+public sealed class AttackInputAction : IInitializable, IDisposable, IAttackInputHandler
 {
-    public sealed class AttackInputAction: IInitializable, IDisposable, IAttackInputHandler
+    public Observable<AttackType> AttackStream => _attackSubject;
+    public Observable<bool> MeleeModeStream => _meleeModeSubject;
+
+    private readonly Subject<AttackType> _attackSubject = new();
+    private readonly Subject<bool> _meleeModeSubject = new();
+
+    private InputAction _attack;
+    private InputAction _combatHold;
+    private bool _currentCombatState = false;
+
+    public void Initialize()
     {
-        public Observable<bool> AttackStream => _attackSubject.DistinctUntilChanged();
-        
-        private readonly Subject<bool> _attackSubject = new();
-        
-        private readonly InputAction _attack;
+        _combatHold = new InputAction(binding: "<Mouse>/rightButton");
+        _combatHold.AddBinding("<Gamepad>/leftTrigger");
 
-        public AttackInputAction()
+        _combatHold.performed += _ =>
         {
-            _attack = new InputAction("Shoot", InputActionType.Button);
-            _attack.AddBinding("<Mouse>/leftButton");
-            _attack.AddBinding("<Gamepad>/rightTrigger");
+            _currentCombatState = true;
+            _meleeModeSubject.OnNext(true);
+        };
 
-            _attack.performed += _ => _attackSubject.OnNext(true);
-            _attack.canceled  += _ => _attackSubject.OnNext(false);
-        }
-
-         void IInitializable.Initialize() => _attack.Enable();
-
-         void IDisposable.Dispose()
+        _combatHold.canceled += _ =>
         {
-            _attack.Disable();
-            _attack.Dispose();
-            _attackSubject.Dispose();
-        }
+            _currentCombatState = false;
+            _meleeModeSubject.OnNext(false);
+        };
+
+        _attack = new InputAction(binding: "<Mouse>/leftButton");
+        _attack.AddBinding("<Gamepad>/rightTrigger");
+        
+        _attack.performed += _ =>
+        {
+            if (!_currentCombatState) return;
+
+            var attackType = UnityEngine.Random.value > 0.5f ? AttackType.Punch : AttackType.Hook;
+            _attackSubject.OnNext(attackType);
+        };
+
+        _attack.Enable();
+        _combatHold.Enable();
+    }
+
+    public void Dispose()
+    {
+        _attack?.Dispose();
+        _combatHold?.Dispose();
+        _attackSubject?.Dispose();
+        _meleeModeSubject?.Dispose();
     }
 }

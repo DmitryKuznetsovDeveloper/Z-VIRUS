@@ -20,7 +20,7 @@ namespace Service
         Rifle
     }
 
-    public sealed class AnimationStateService : IInitializable, IDisposable
+    public sealed class MoveAnimationService : IInitializable, IDisposable
     {
         private readonly MoveAnimatorController _moveAnimator;
         private readonly MoveAnimationLibrary _library;
@@ -33,7 +33,7 @@ namespace Service
         private MovementState _currentMoveState = MovementState.Walk;
         private WeaponType _currentWeapon = WeaponType.None;
 
-        public AnimationStateService(MoveAnimatorController animator, MoveAnimationLibrary library, IMoveInputHandler input, IWeaponStateProvider weaponStateProvider)
+        public MoveAnimationService(MoveAnimatorController animator, MoveAnimationLibrary library, IMoveInputHandler input, IWeaponStateProvider weaponStateProvider)
         {
             _moveAnimator = animator;
             _library = library;
@@ -45,7 +45,6 @@ namespace Service
         {
             _sprintSub = _input.SprintStream.Subscribe(isSprinting  =>
             {
-                UnityEngine.Debug.Log($"[SprintStream] Shift pressed: {isSprinting}");
                 _currentMoveState = isSprinting ? MovementState.Sprint : MovementState.Walk;
                 UpdateConfig();
             });
@@ -60,7 +59,6 @@ namespace Service
         private void UpdateConfig()
         {
             var config = _library.GetByState(_currentMoveState, _currentWeapon);
-            UnityEngine.Debug.Log($"[AnimationStateService] Set config: {_currentMoveState} + {_currentWeapon} => {config?.name}");
             _moveAnimator.SetAnimationConfig(config);
         }
 

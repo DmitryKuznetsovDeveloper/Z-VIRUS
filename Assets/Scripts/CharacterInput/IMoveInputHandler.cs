@@ -14,8 +14,15 @@ namespace CharacterInput
         Observable<Vector2> LookStream { get; }
     }
 
+    public enum AttackType
+    {
+        Punch,
+        Hook,
+        Shoot
+    }
     public interface IAttackInputHandler
     {
-        Observable<bool> AttackStream { get; }
+        Observable<AttackType> AttackStream { get; }
+        Observable<bool> MeleeModeStream { get; }
     }
 }
