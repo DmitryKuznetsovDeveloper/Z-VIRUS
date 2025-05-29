@@ -5,11 +5,12 @@ using R3;
 using UnityEngine;
 using Zenject;
 
-namespace Core
+namespace Controllers
 {
     public sealed class PlayerMovementController : IInitializable, IDisposable
     {
         private const float MoveSpeed = 4f;
+        private const float SprintSpeed = 8f;
         
         private readonly CharacterController _characterController;
         private readonly MoveAnimatorController _moveAnimator;
@@ -18,7 +19,9 @@ namespace Core
         private Vector2 _moveInput;
         private Transform _moveTransform;
         private Vector3 _moveDirection;
+        private bool _isSprinting;
         
+        private IDisposable _sprintSub;
         private IDisposable _moveSub;
         private IDisposable _tickSub;
 
@@ -33,6 +36,7 @@ namespace Core
          void IInitializable.Initialize()
         {
             _moveSub = _input.MoveStream.Subscribe(input => _moveInput = input);
+            _sprintSub = _input.SprintStream.Subscribe(isSprinting => _isSprinting = isSprinting);
             _tickSub = Observable.EveryUpdate().Subscribe(_ =>
             {
                 Move(_moveInput);
@@ -44,6 +48,7 @@ namespace Core
         void IDisposable.Dispose()
         {
             _moveSub?.Dispose();
+            _sprintSub?.Dispose();
             _tickSub?.Dispose();
         }
         
@@ -57,10 +62,11 @@ namespace Core
 
             _moveDirection.Set(direction.x, 0f, direction.y);
             var worldDirection = _moveTransform.TransformDirection(_moveDirection);
-            float distance = worldDirection.magnitude;
+            var distance = worldDirection.magnitude;
 
             // движение
-            _characterController.Move(worldDirection * (MoveSpeed * Time.deltaTime));
+            var speed = _isSprinting ? SprintSpeed : MoveSpeed;
+            _characterController.Move(worldDirection * (speed * Time.deltaTime));
 
             // синхронизация скорости движения с анимацией
             _moveAnimator.SetAnimationSpeed(distance);
@@ -76,6 +82,5 @@ namespace Core
                 90f * Time.deltaTime
             );
         }
-
     }
 }

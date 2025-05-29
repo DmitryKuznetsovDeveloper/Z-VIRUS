@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed21d35e07804bd5bc539db57712b767, type: 3}
+  m_Name: MoveAnimationLibrary
+  m_EditorClassIdentifier: 
+  _animationSets:
+  - State: 0
+    Weapon: 0
+    Config: {fileID: 11400000, guid: d9a0bcb6e7df8e049a9cf53a020b0692, type: 2}
+  - State: 1
+    Weapon: 0
+    Config: {fileID: 11400000, guid: ccaa6f8d52642144e87d174ac24eeb3b, type: 2}

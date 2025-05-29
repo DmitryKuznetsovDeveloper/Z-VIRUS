@@ -6,7 +6,7 @@ namespace CharacterInput
     public interface IMoveInputHandler
     {
         Observable<Vector2> MoveStream { get; }
-        Observable<float> SprintStream { get; }
+        Observable<bool> SprintStream { get; }
     }
 
     public interface ILookInputHandler

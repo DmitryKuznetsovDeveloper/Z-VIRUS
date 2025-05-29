@@ -4,7 +4,7 @@ using R3;
 using UnityEngine;
 using Zenject;
 
-namespace Core
+namespace Controllers
 {
     public sealed class PlayerLookController :IInitializable, IDisposable
     {

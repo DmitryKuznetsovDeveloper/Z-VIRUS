@@ -9,10 +9,10 @@ namespace CharacterInput
     public sealed class MoveInputActions : IInitializable, IDisposable, IMoveInputHandler
     {
         public Observable<Vector2> MoveStream => _moveSubject.DistinctUntilChanged();
-        public Observable<float> SprintStream => _sprintSubject.DistinctUntilChanged();
+        public Observable<bool> SprintStream => _sprintSubject.DistinctUntilChanged();
         
         private readonly Subject<Vector2> _moveSubject = new();
-        private readonly Subject<float> _sprintSubject = new();
+        private readonly Subject<bool> _sprintSubject = new();
         
         private readonly InputAction _move;
         private readonly InputAction _sprint;
@@ -36,8 +36,8 @@ namespace CharacterInput
             _sprint.AddBinding("<Keyboard>/leftShift");
             _sprint.AddBinding("<Gamepad>/leftStickPress");
 
-            _sprint.performed += ctx => _sprintSubject.OnNext(1f);
-            _sprint.canceled  += _   => _sprintSubject.OnNext(0f);
+            _sprint.performed += ctx => _sprintSubject.OnNext(true);
+            _sprint.canceled  += _   => _sprintSubject.OnNext(false);
         }
 
         public void Initialize()
