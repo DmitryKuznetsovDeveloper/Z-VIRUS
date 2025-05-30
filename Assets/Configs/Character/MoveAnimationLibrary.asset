@@ -16,12 +16,15 @@ MonoBehaviour:
   - State: 0
     Weapon: 0
     Config: {fileID: 11400000, guid: d9a0bcb6e7df8e049a9cf53a020b0692, type: 2}
+  - State: 1
+    Weapon: 0
+    Config: {fileID: 11400000, guid: ccaa6f8d52642144e87d174ac24eeb3b, type: 2}
   - State: 0
     Weapon: 1
     Config: {fileID: 11400000, guid: 941e855530849164a83b46944f4e44e9, type: 2}
   - State: 1
-    Weapon: 0
-    Config: {fileID: 11400000, guid: ccaa6f8d52642144e87d174ac24eeb3b, type: 2}
-  - State: 1
     Weapon: 1
     Config: {fileID: 11400000, guid: f9afae3ca9fbb854d881b248f79555a6, type: 2}
+  - State: 0
+    Weapon: 2
+    Config: {fileID: 11400000, guid: 282f2116a4e86684f83d999c7111f5c5, type: 2}
