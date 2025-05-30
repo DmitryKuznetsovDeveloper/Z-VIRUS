@@ -29,7 +29,7 @@ namespace Installers
             Container.Bind<Animator>().FromComponentInHierarchy().AsSingle();
             Container.Bind<AnimancerComponent>().FromComponentInHierarchy().AsSingle();
             Container.BindInstance(_library);
-            Container.BindInterfacesAndSelfTo<MoveAnimatorController>().AsSingle().WithArguments(_library.GetByState(MovementState.Walk,WeaponType.None));
+            Container.BindInterfacesAndSelfTo<MoveAnimatorController>().AsSingle().WithArguments(_library.GetByState(MovementState.Walk,WeaponType.Melee));
             Container.BindInterfacesAndSelfTo<AttackAnimatorController>().AsSingle().WithArguments(_attackConfig);
             Container.BindInterfacesAndSelfTo<MoveAnimationService>().AsSingle();
             Container.BindInterfacesAndSelfTo<AttackAnimationService>().AsSingle();

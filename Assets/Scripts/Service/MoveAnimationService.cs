@@ -15,7 +15,7 @@ namespace Service
     
     public enum WeaponType
     {
-        None,
+        Melee,
         Pistol,
         Rifle
     }
@@ -31,7 +31,7 @@ namespace Service
         private IDisposable _weaponSub;
 
         private MovementState _currentMoveState = MovementState.Walk;
-        private WeaponType _currentWeapon = WeaponType.None;
+        private WeaponType _currentWeapon = WeaponType.Melee;
 
         public MoveAnimationService(MoveAnimatorController animator, MoveAnimationLibrary library, IMoveInputHandler input, IWeaponStateProvider weaponStateProvider)
         {

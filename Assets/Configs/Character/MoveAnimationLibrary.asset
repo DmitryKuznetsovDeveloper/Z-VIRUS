@@ -28,3 +28,6 @@ MonoBehaviour:
   - State: 0
     Weapon: 2
     Config: {fileID: 11400000, guid: 282f2116a4e86684f83d999c7111f5c5, type: 2}
+  - State: 1
+    Weapon: 2
+    Config: {fileID: 11400000, guid: 6f8508559c8770746a261194bf8005d2, type: 2}

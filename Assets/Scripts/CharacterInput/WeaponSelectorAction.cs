@@ -14,9 +14,10 @@ namespace CharacterInput
 
         private InputAction _select1;
         private InputAction _select2;
+        private InputAction _select3;
         private InputAction _scroll;
 
-        private readonly WeaponType[] _weaponOrder = { WeaponType.Pistol, WeaponType.Rifle };
+        private readonly WeaponType[] _weaponOrder = { WeaponType.Melee, WeaponType.Pistol, WeaponType.Rifle };
         private int _currentIndex = 0;
 
         public void Initialize()
@@ -24,12 +25,15 @@ namespace CharacterInput
             // Цифровые кнопки
             _select1 = new InputAction(binding: "<Keyboard>/1");
             _select2 = new InputAction(binding: "<Keyboard>/2");
+            _select3 = new InputAction(binding: "<Keyboard>/2");
 
             _select1.performed += _ => SetWeaponByIndex(0);
             _select2.performed += _ => SetWeaponByIndex(1);
+            _select3.performed += _ => SetWeaponByIndex(2);
 
             _select1.Enable();
             _select2.Enable();
+            _select3.Enable();
 
             // Колесико мыши
             _scroll = new InputAction(binding: "<Mouse>/scroll");
@@ -37,9 +41,9 @@ namespace CharacterInput
             {
                 var scroll = ctx.ReadValue<Vector2>().y;
                 if (scroll > 0.01f)
-                    ScrollWeapon(-1); // вверх
+                    ScrollWeapon(-1); 
                 else if (scroll < -0.01f)
-                    ScrollWeapon(1);  // вниз
+                    ScrollWeapon(1);
             };
             _scroll.Enable();
 
@@ -50,6 +54,7 @@ namespace CharacterInput
         {
             _select1?.Dispose();
             _select2?.Dispose();
+            _select3?.Dispose();
             _scroll?.Dispose();
             _weaponSubject?.Dispose();
         }
