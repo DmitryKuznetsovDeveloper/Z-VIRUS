@@ -20,19 +20,21 @@ namespace Data
         {
             if (dir == Vector2.zero) return Idle;
 
-            float angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
+            var angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
             angle = Mathf.Repeat(angle + 360f, 360f);
 
-            if (angle is < 22.5f or >= 337.5f) return Up;
-            if (angle < 67.5f) return UpRight;
-            if (angle < 112.5f) return Right;
-            if (angle < 157.5f) return DownRight;
-            if (angle < 202.5f) return Down;
-            if (angle < 247.5f) return DownLeft;
-            if (angle < 292.5f) return Left;
-            if (angle < 337.5f) return UpLeft;
-
-            return Idle;
+            return angle switch
+            {
+                < 22.5f or >= 337.5f => Up,
+                < 67.5f => UpRight,
+                < 112.5f => Right,
+                < 157.5f => DownRight,
+                < 202.5f => Down,
+                < 247.5f => DownLeft,
+                < 292.5f => Left,
+                < 337.5f => UpLeft,
+                _ => Idle
+            };
         }
     }
 }

@@ -23,15 +23,16 @@ MonoBehaviour:
     _NormalizedStartTime: NaN
   Punches:
   - _FadeDuration: 0.25
-    _Speed: 1
+    _Speed: 1.5
     _Events:
-      _NormalizedTimes: []
+      _NormalizedTimes:
+      - 1
       _Callbacks: []
       _Names: []
     _Clip: {fileID: -203655887218126122, guid: 6031640a1545d384c86849f74c9f8eca, type: 3}
     _NormalizedStartTime: NaN
   - _FadeDuration: 0.25
-    _Speed: 1
+    _Speed: 1.5
     _Events:
       _NormalizedTimes: []
       _Callbacks: []
@@ -40,7 +41,7 @@ MonoBehaviour:
     _NormalizedStartTime: NaN
   Hooks:
   - _FadeDuration: 0.25
-    _Speed: 1
+    _Speed: 1.5
     _Events:
       _NormalizedTimes: []
       _Callbacks: []
@@ -48,7 +49,7 @@ MonoBehaviour:
     _Clip: {fileID: -203655887218126122, guid: fdb29621f3f9ba648a482786cedb7087, type: 3}
     _NormalizedStartTime: NaN
   - _FadeDuration: 0.25
-    _Speed: 1
+    _Speed: 1.5
     _Events:
       _NormalizedTimes: []
       _Callbacks: []

@@ -15,26 +15,31 @@ namespace Controllers
         private readonly CharacterController _characterController;
         private readonly MoveAnimatorController _moveAnimator;
         private  readonly IMoveInputHandler _input;
+        private  readonly IAttackInputHandler _attackInput;
 
         private Vector2 _moveInput;
         private Transform _moveTransform;
         private Vector3 _moveDirection;
         private bool _isSprinting;
+        private bool _isMeleeAttacking;
         
         private IDisposable _sprintSub;
         private IDisposable _moveSub;
         private IDisposable _tickSub;
+        private IDisposable _meleeModeSub;
 
-        public PlayerMovementController(CharacterController characterController, MoveAnimatorController moveAnimator, IMoveInputHandler input)
+        public PlayerMovementController(CharacterController characterController, MoveAnimatorController moveAnimator, IMoveInputHandler input, IAttackInputHandler attackInput)
         {
             _characterController = characterController;
             _moveAnimator = moveAnimator;
             _input = input;
+            _attackInput = attackInput;
             _moveTransform = characterController.transform;
         }
 
          void IInitializable.Initialize()
         {
+            _meleeModeSub = _attackInput.MeleeModeStream.Subscribe(isMeleeAttacking => _isMeleeAttacking = isMeleeAttacking);
             _moveSub = _input.MoveStream.Subscribe(input => _moveInput = input);
             _sprintSub = _input.SprintStream.Subscribe(isSprinting => _isSprinting = isSprinting);
             _tickSub = Observable.EveryUpdate().Subscribe(_ =>
@@ -54,9 +59,8 @@ namespace Controllers
         
         private void Move(Vector2 direction)
         {
-            if (direction.sqrMagnitude < 0.01f)
+            if (direction.sqrMagnitude < 0.01f || _isMeleeAttacking)
             {
-                _moveAnimator.SetAnimationSpeed(0f);
                 return;
             }
 

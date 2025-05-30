@@ -6,14 +6,14 @@ namespace Animations.Character
 {
     public sealed class MoveAnimatorController
     {
-        private MoveAnimationConfig _currentConfig;
         private readonly AnimancerComponent _animancer;
+        private MoveAnimationConfig _currentConfig;
         private AnimancerState _currentState;
 
-        public MoveAnimatorController(AnimancerComponent animancer, MoveAnimationConfig defaultConfig)
+        public MoveAnimatorController(AnimancerComponent animancer, MoveAnimationConfig config)
         {
             _animancer = animancer;
-            _currentConfig = defaultConfig;
+            _currentConfig = config;
         }
 
         public void SetAnimationConfig(MoveAnimationConfig config)
@@ -24,13 +24,14 @@ namespace Animations.Character
         public void OnMoveAnimation(Vector2 input)
         {
             var clip = _currentConfig.GetByDirection(input);
-
-            if (clip.State?.IsPlaying == true)
+            if (_animancer.States.TryGet(clip, out var state) && state.IsPlaying is true and true)
+            {
+                _currentState = state;
                 return;
-
-            _currentState = _animancer.Play(clip, 0.25f);
+            }
+            _currentState = _animancer.Play(clip, 0.2f);
         }
-
+        
         public void SetAnimationSpeed(float speed)
         {
             if (_currentState != null)
