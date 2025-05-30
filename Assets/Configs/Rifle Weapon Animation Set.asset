@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5036fb40c924f079e56cf0764cc976f, type: 3}
+  m_Name: Rifle Weapon Animation Set
+  m_EditorClassIdentifier: 
+  Idle: {fileID: -203655887218126122, guid: 08e9240bf70aeba49a37ddba46fa9c0f, type: 3}
+  Walk: {fileID: 11400000, guid: 282f2116a4e86684f83d999c7111f5c5, type: 2}
+  Run: {fileID: 11400000, guid: 6f8508559c8770746a261194bf8005d2, type: 2}
+  Shoot:
+    _FadeDuration: 0.25
+    _Speed: 1
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: -203655887218126122, guid: fd2368ea8378b1e4bb54de8552b149db, type: 3}
+    _NormalizedStartTime: NaN
+  UpperBodyMask: {fileID: 31900000, guid: e982f61d87eb9874388442a417a65cc8, type: 2}
+  references:
+    version: 2
+    RefIds: []

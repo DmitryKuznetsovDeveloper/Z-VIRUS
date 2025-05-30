@@ -1,21 +1,14 @@
-﻿using System;
-using CharacterInput;
-using R3;
+﻿using CharacterInput;
 using UnityEngine;
 using Zenject;
 
 namespace Controllers
 {
-    public sealed class PlayerLookController :IInitializable, IDisposable
+    public sealed class PlayerLookController :ITickable
     {
         private const float RotationSpeed = 180f;
-
         private readonly ILookInputHandler _look;
         private readonly Transform _transform;
-        
-        private IDisposable _lookSub;
-        private IDisposable _tickSub;
-
         private float _angle;
         private float _lookInputX;
 
@@ -25,22 +18,9 @@ namespace Controllers
             _transform = transform;
         }
         
-        void IInitializable.Initialize()
-        {
-            _lookSub = _look.LookStream
-                .Subscribe(look => _lookInputX = look.x);
+         void ITickable.Tick() => Rotate();
 
-            _tickSub = Observable.EveryUpdate()
-                .Subscribe(_ => Rotate());
-        }
-
-        void IDisposable.Dispose()
-        {
-            _lookSub?.Dispose();
-            _tickSub?.Dispose();
-        }
-        
-        private void Rotate()
+         private void Rotate()
         {
             if (Mathf.Abs(_lookInputX) < 0.01f)
                 return;

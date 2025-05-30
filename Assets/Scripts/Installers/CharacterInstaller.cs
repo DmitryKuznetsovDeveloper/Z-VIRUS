@@ -1,9 +1,8 @@
 ﻿using Animancer;
-using Animations.Character;
 using CharacterInput;
 using Controllers;
 using Data;
-using Service;
+using FSM;
 using UnityEngine;
 using Zenject;
 
@@ -12,33 +11,36 @@ namespace Installers
     public sealed class CharacterInstaller : MonoInstaller
     {
         [Header("Animation Configs")]
-        [SerializeField] private MoveAnimationLibrary _library;
-        [SerializeField] private AttackAnimationConfig _attackConfig;
+        [SerializeField] private CharacterAnimationConfigProvider _animationConfig;
+
+        [Header("Weapon Animation Collection")]
+        [SerializeField] private WeaponAnimationCollection _weaponAnimations;
+
+        [Header("Melee Combo Config")]
+        [SerializeField] private MeleeComboAnimationSet _meleeCombo;
+
         public override void InstallBindings()
         {
-            //Inputs
+            // Inputs
             Container.BindInterfacesAndSelfTo<MoveInputActions>().AsSingle();
             Container.BindInterfacesAndSelfTo<LookInputAction>().AsSingle();
             Container.BindInterfacesAndSelfTo<AttackInputAction>().AsSingle();
             Container.BindInterfacesAndSelfTo<WeaponSelectorAction>().AsSingle();
-            
-            //Common
+
+            // Common
             Container.Bind<CharacterController>().FromComponentInHierarchy().AsSingle();
-            
-            //Animations
             Container.Bind<Animator>().FromComponentInHierarchy().AsSingle();
             Container.Bind<AnimancerComponent>().FromComponentInHierarchy().AsSingle();
-            Container.BindInstance(_library);
-            Container.BindInterfacesAndSelfTo<MoveAnimatorController>().AsSingle().WithArguments(_library.GetByState(MovementState.Walk,WeaponType.Melee));
-            Container.BindInterfacesAndSelfTo<AttackAnimatorController>().AsSingle().WithArguments(_attackConfig);
-            Container.BindInterfacesAndSelfTo<MoveAnimationService>().AsSingle();
-            Container.BindInterfacesAndSelfTo<AttackAnimationService>().AsSingle();
 
-            
-            //Controllers
+            // Animation Configs
+            Container.Bind<WeaponAnimationCollection>().FromInstance(_weaponAnimations).AsSingle();
+            Container.Bind<MeleeComboAnimationSet>().FromInstance(_meleeCombo).AsSingle();
+
+            // State Machine
+            Container.BindInterfacesTo<CharacterAnimationStateMachine>().AsSingle();
+
+            // Movement Controller
             Container.BindInterfacesTo<PlayerMovementController>().AsSingle();
-           // Container.BindInterfacesTo<PlayerLookController>().AsSingle().WithArguments(gameObject.transform);
-           
         }
     }
 }

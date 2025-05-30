@@ -446,8 +446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc0333f5315a42288a07157680bd8d9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _library: {fileID: 11400000, guid: 9460392358fe2224b81f4d6690e293a8, type: 2}
-  _attackConfig: {fileID: 11400000, guid: f76efa02c28c3d3458f78fed3d65b255, type: 2}
+  _animationConfig: {fileID: 0}
 --- !u!1 &1238846771797345863
 GameObject:
   m_ObjectHideFlags: 0
