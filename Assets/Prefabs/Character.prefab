@@ -447,6 +447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _library: {fileID: 11400000, guid: 9460392358fe2224b81f4d6690e293a8, type: 2}
+  _attackConfig: {fileID: 11400000, guid: f76efa02c28c3d3458f78fed3d65b255, type: 2}
 --- !u!1 &1238846771797345863
 GameObject:
   m_ObjectHideFlags: 0

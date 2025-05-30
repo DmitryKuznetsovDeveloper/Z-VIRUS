@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Animations.Character
 {
-    public sealed class MoveAnimatorController
+    public sealed class MoveAnimatorController : IIdleResettable
     {
         private readonly AnimancerComponent _animancer;
         private MoveAnimationConfig _currentConfig;
@@ -37,5 +37,7 @@ namespace Animations.Character
             if (_currentState != null)
                 _currentState.Speed = speed;
         }
+        
+        public void ReapplyIdle() => OnMoveAnimation(Vector2.zero);
     }
 }
