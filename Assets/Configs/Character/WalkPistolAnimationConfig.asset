@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 977ea6602f0d4e12badc4d5f6ffcf949, type: 3}
+  m_Name: WalkPistolAnimationConfig
+  m_EditorClassIdentifier: 
+  Idle:
+    _FadeDuration: 0.25
+    _Speed: 1
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: -203655887218126122, guid: b0281e226ed5f774196ac550eb4e75dd, type: 3}
+    _NormalizedStartTime: NaN
+  Up:
+    _FadeDuration: 0.25
+    _Speed: 1
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: -203655887218126122, guid: 1ec973226adb64b448859e0586b52d32, type: 3}
+    _NormalizedStartTime: NaN
+  Right:
+    _FadeDuration: 0.25
+    _Speed: 1
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: -203655887218126122, guid: ee441c8681f0fc84ab8b3472a9bb1fea, type: 3}
+    _NormalizedStartTime: NaN
+  Down:
+    _FadeDuration: 0.25
+    _Speed: 1
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: -203655887218126122, guid: 483e33574af4df84091306a1fdd6cffb, type: 3}
+    _NormalizedStartTime: NaN
+  Left:
+    _FadeDuration: 0.25
+    _Speed: 1
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: -203655887218126122, guid: 0582fbf92472e9e42a9893c3ee6445ff, type: 3}
+    _NormalizedStartTime: NaN
+  UpRight:
+    _FadeDuration: 0.25
+    _Speed: 1
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: -203655887218126122, guid: 2e9cb039834f2ae439776fa3641e9593, type: 3}
+    _NormalizedStartTime: NaN
+  DownRight:
+    _FadeDuration: 0.25
+    _Speed: 1
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: -203655887218126122, guid: 5cb2e17dec4965f489ece4f235638d36, type: 3}
+    _NormalizedStartTime: NaN
+  DownLeft:
+    _FadeDuration: 0.25
+    _Speed: 1
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: -203655887218126122, guid: b61c3cb2a4fea2f45b8313b8bf8c162a, type: 3}
+    _NormalizedStartTime: NaN
+  UpLeft:
+    _FadeDuration: 0.25
+    _Speed: 1
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: -203655887218126122, guid: 2f9c169b461df23499ba0af179737bf6, type: 3}
+    _NormalizedStartTime: NaN
+  references:
+    version: 2
+    RefIds: []
