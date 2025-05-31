@@ -1,7 +1,6 @@
 ﻿using Animancer;
 using CharacterInput;
 using Data;
-using UnityEngine;
 
 namespace FSM.CharacterAnimations
 {
@@ -32,7 +31,7 @@ namespace FSM.CharacterAnimations
             if (_currentClip != nextClip)
             {
                 _currentClip = nextClip;
-                _animancer.Play(_currentClip);
+                _animancer.Play(_currentClip,0.2f);
             }
 
             if (_animancer.States.TryGet(_currentClip, out var state))

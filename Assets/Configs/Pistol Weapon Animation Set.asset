@@ -15,16 +15,7 @@ MonoBehaviour:
   Idle: {fileID: -203655887218126122, guid: b0281e226ed5f774196ac550eb4e75dd, type: 3}
   Walk: {fileID: 11400000, guid: 941e855530849164a83b46944f4e44e9, type: 2}
   Run: {fileID: 11400000, guid: f9afae3ca9fbb854d881b248f79555a6, type: 2}
-  Shoot:
-    _FadeDuration: 0.25
-    _Speed: 1
-    _Events:
-      _NormalizedTimes: []
-      _Callbacks: []
-      _Names: []
-    _Clip: {fileID: -203655887218126122, guid: d9b3549d48eef2f4c866bc1d40d02e38, type: 3}
-    _NormalizedStartTime: NaN
+  Attacks:
+  - {fileID: -203655887218126122, guid: d9b3549d48eef2f4c866bc1d40d02e38, type: 3}
   UpperBodyMask: {fileID: 31900000, guid: 709970d50333d5e4fbf04a8e0e72a0ca, type: 2}
-  references:
-    version: 2
-    RefIds: []
+  ComboResetTime: 1

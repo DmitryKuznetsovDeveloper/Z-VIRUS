@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5231bf761f84c9a863a21808b7144ab, type: 3}
   m_Name: Weapon Animation Collection
   m_EditorClassIdentifier: 
+  Unarmed: {fileID: 11400000, guid: f788f1b4fe6a14d4381f3d85ca2516ab, type: 2}
   Pistol: {fileID: 11400000, guid: ff00a7d63b64a4a47918222ff7d70df1, type: 2}
   Rifle: {fileID: 11400000, guid: e0d2e6c3746a87e4ea21d94d12442bf3, type: 2}

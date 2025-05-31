@@ -3,6 +3,7 @@ using CharacterInput;
 using Controllers;
 using Data;
 using FSM;
+using FSM.CharacterAnimations;
 using UnityEngine;
 using Zenject;
 
@@ -10,14 +11,8 @@ namespace Installers
 {
     public sealed class CharacterInstaller : MonoInstaller
     {
-        [Header("Animation Configs")]
-        [SerializeField] private CharacterAnimationConfigProvider _animationConfig;
-
         [Header("Weapon Animation Collection")]
         [SerializeField] private WeaponAnimationCollection _weaponAnimations;
-
-        [Header("Melee Combo Config")]
-        [SerializeField] private MeleeComboAnimationSet _meleeCombo;
 
         public override void InstallBindings()
         {
@@ -34,7 +29,6 @@ namespace Installers
 
             // Animation Configs
             Container.Bind<WeaponAnimationCollection>().FromInstance(_weaponAnimations).AsSingle();
-            Container.Bind<MeleeComboAnimationSet>().FromInstance(_meleeCombo).AsSingle();
 
             // State Machine
             Container.BindInterfacesTo<CharacterAnimationStateMachine>().AsSingle();

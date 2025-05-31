@@ -1608,18 +1608,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7736306999056500704, guid: 34723ed05ab0d19439faf3844240d6a0, type: 3}
-      propertyPath: _meleeCombo
-      value: 
-      objectReference: {fileID: 11400000, guid: 67aaa0eedc944e844aa0a194706221a8, type: 2}
-    - target: {fileID: 7736306999056500704, guid: 34723ed05ab0d19439faf3844240d6a0, type: 3}
-      propertyPath: _animationConfig
-      value: 
-      objectReference: {fileID: 11400000, guid: 8541204d386c3174ba8b05446043a406, type: 2}
-    - target: {fileID: 7736306999056500704, guid: 34723ed05ab0d19439faf3844240d6a0, type: 3}
-      propertyPath: _weaponAnimations
-      value: 
-      objectReference: {fileID: 11400000, guid: 1228a06f8f05e994d917e41cc2646f05, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

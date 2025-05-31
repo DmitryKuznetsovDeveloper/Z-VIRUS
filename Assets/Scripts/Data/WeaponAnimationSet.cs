@@ -1,19 +1,22 @@
-﻿using Animancer;
-using Data;
-using UnityEngine;
+﻿using UnityEngine;
 
-[CreateAssetMenu(menuName = "Configs/Animations/WeaponAnimationSet")]
-public sealed class WeaponAnimationSet : ScriptableObject
+namespace Data
 {
-    public AnimationClip Idle;
-    public MoveAnimationConfig Walk;
-    public MoveAnimationConfig Run;
-    public ClipTransition Shoot;
-    public AvatarMask UpperBodyMask;
-}
-public enum WeaponType
-{
-    Unarmed,
-    Pistol,
-    Rifle
+    [CreateAssetMenu(fileName = "WeaponAnimationSet", menuName = "Configs/Weapon Animation Set")]
+    public sealed class WeaponAnimationSet : ScriptableObject
+    {
+        public AnimationClip Idle;
+        public MoveAnimationConfig Walk;
+        public MoveAnimationConfig Run;
+        public AnimationClip[] Attacks;
+        public AvatarMask UpperBodyMask;
+        public float ComboResetTime = 1f;
+    }
+
+    public enum WeaponType
+    {
+        Unarmed,
+        Pistol,
+        Rifle
+    }
 }

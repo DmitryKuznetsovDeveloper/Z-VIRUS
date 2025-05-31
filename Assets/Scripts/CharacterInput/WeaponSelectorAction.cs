@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Data;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using FSM.CharacterAnimations;
 using Zenject;

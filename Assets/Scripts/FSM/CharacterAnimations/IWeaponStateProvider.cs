@@ -1,4 +1,6 @@
-﻿namespace FSM.CharacterAnimations
+﻿using Data;
+
+namespace FSM.CharacterAnimations
 {
     public interface IWeaponStateProvider
     {

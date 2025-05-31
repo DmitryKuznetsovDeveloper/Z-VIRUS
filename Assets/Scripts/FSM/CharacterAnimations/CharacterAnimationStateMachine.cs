@@ -1,89 +1,84 @@
 ﻿using Animancer;
-using FSM;
 using CharacterInput;
 using Data;
-using FSM.CharacterAnimations;
 using Zenject;
 
-public sealed class CharacterAnimationStateMachine : ITickable
+namespace FSM.CharacterAnimations
 {
-    private readonly StateMachine _stateMachine = new();
-
-    private readonly AnimancerComponent _animancer;
-    private readonly IWeaponStateProvider _weapon;
-    private readonly IMoveInputHandler _moveInput;
-    private readonly IAttackInputHandler _attackInput;
-    private readonly WeaponAnimationCollection _collection;
-    private readonly MeleeComboAnimationSet _meleeComboSet;
-
-    private AttackComboState _meleeComboState;
-    private IdleState _meleeIdleState;
-    private ShootState _shootState;
-    private RunState _runState;
-    private WalkState _walkState;
-    private IdleState _idleState;
-
-    private WeaponType _cachedWeapon;
-
-    public CharacterAnimationStateMachine(
-        AnimancerComponent animancer,
-        IWeaponStateProvider weapon,
-        IMoveInputHandler moveInput,
-        IAttackInputHandler attackInput,
-        WeaponAnimationCollection collection,
-        MeleeComboAnimationSet meleeComboSet)
+    public sealed class CharacterAnimationStateMachine : ITickable
     {
-        _animancer = animancer;
-        _weapon = weapon;
-        _moveInput = moveInput;
-        _attackInput = attackInput;
-        _collection = collection;
-        _meleeComboSet = meleeComboSet;
+        private readonly StateMachine _stateMachine = new();
 
-        SetupStatesForWeapon(_weapon.CurrentWeapon);
-    }
+        private readonly AnimancerComponent _animancer;
+        private readonly IWeaponStateProvider _weapon;
+        private readonly IMoveInputHandler _moveInput;
+        private readonly IAttackInputHandler _attackInput;
+        private readonly WeaponAnimationCollection _collection;
 
-    public void Tick()
-    {
-        _stateMachine.Tick();
+        // Все состояния реализуют FSM.IState
+        private  AttackState _attackState;
+        private RunState _runState;
+        private WalkState _walkState;
+        private IdleState _idleState;
 
-        if (_cachedWeapon != _weapon.CurrentWeapon)
+        private WeaponType _cachedWeapon;
+
+        public CharacterAnimationStateMachine(
+            AnimancerComponent animancer,
+            IWeaponStateProvider weapon,
+            IMoveInputHandler moveInput,
+            IAttackInputHandler attackInput,
+            WeaponAnimationCollection collection)
         {
+            _animancer = animancer;
+            _weapon = weapon;
+            _moveInput = moveInput;
+            _attackInput = attackInput;
+            _collection = collection;
+
             SetupStatesForWeapon(_weapon.CurrentWeapon);
         }
 
-        if (_weapon.CurrentWeapon == WeaponType.Unarmed)
+        public void Tick()
         {
-            TrySet(_meleeComboState);
-            TrySet(_meleeIdleState);
-        }
-        else
-        {
-            TrySet(_shootState);
-            TrySet(_runState);
-            TrySet(_walkState);
-            TrySet(_idleState);
-        }
-    }
+            _stateMachine.Tick();
 
-    private void SetupStatesForWeapon(WeaponType weapon)
-    {
-        _cachedWeapon = weapon;
+            if (_cachedWeapon != _weapon.CurrentWeapon)
+            {
+                SetupStatesForWeapon(_weapon.CurrentWeapon);
+            }
 
-        if (weapon == WeaponType.Unarmed)
-        {
-            _meleeComboState = new AttackComboState(_animancer, _attackInput, _meleeComboSet);
-            _meleeIdleState = new IdleState(_animancer, _meleeComboSet.Idle.Clip, _moveInput);
+            if (_attackState is AttackState attack && attack.IsPlaying)
+            {
+                _stateMachine.TrySet(_attackState);
+            }
+            else
+            {
+                _stateMachine.TrySetMany(
+                    _attackState,
+                    _runState,
+                    _walkState,
+                    _idleState
+                );
+            }
         }
-        else
+
+        private void SetupStatesForWeapon(WeaponType weapon)
         {
+            _cachedWeapon = weapon;
+
             var currentSet = _collection.GetSet(weapon);
-            _shootState = new ShootState(_animancer, currentSet.Shoot, _attackInput, currentSet.UpperBodyMask);
+
+            _attackState = new AttackState(
+                _animancer,
+                _attackInput,
+                currentSet.Attacks,
+                currentSet.ComboResetTime
+            );
+
             _runState = new RunState(_animancer, currentSet.Run, _moveInput);
             _walkState = new WalkState(_animancer, currentSet.Walk, _moveInput);
             _idleState = new IdleState(_animancer, currentSet.Idle, _moveInput);
         }
     }
-
-    private void TrySet(object state) => _stateMachine.SetState(state);
 }

@@ -17,7 +17,7 @@ namespace FSM.CharacterAnimations
             _input = input;
         }
 
-        public void Enter() => _animancer.Play(_clip);
+        public void Enter() => _animancer.Play(_clip,0.2f);
 
         public bool CanEnter() => _input.MoveInput == Vector2.zero;
     }

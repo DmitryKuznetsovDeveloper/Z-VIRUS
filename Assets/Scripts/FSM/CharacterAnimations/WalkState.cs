@@ -22,7 +22,7 @@ namespace FSM.CharacterAnimations
         public void Enter()
         {
             _currentClip = _walkConfig.GetByDirection(_input.MoveInput);
-            _animancer.Play(_currentClip);
+            _animancer.Play(_currentClip,0.2f);
         }
 
         public void Tick()

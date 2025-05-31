@@ -1,17 +1,22 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(menuName = "Configs/Animations/WeaponAnimationCollection")]
-public sealed class WeaponAnimationCollection : ScriptableObject
+namespace Data
 {
-    public WeaponAnimationSet Pistol;
-    public WeaponAnimationSet Rifle;
-
-    public WeaponAnimationSet GetSet(WeaponType weapon)
+    [CreateAssetMenu(menuName = "Configs/Animations/WeaponAnimationCollection")]
+    public sealed class WeaponAnimationCollection : ScriptableObject
     {
-        return weapon switch
+        public WeaponAnimationSet Unarmed;
+        public WeaponAnimationSet Pistol;
+        public WeaponAnimationSet Rifle;
+
+        public WeaponAnimationSet GetSet(WeaponType weapon)
         {
-            WeaponType.Pistol => Pistol,
-            WeaponType.Rifle => Rifle,
-        };
+            return weapon switch
+            {
+                WeaponType.Unarmed => Unarmed,
+                WeaponType.Pistol => Pistol,
+                WeaponType.Rifle => Rifle,
+            };
+        }
     }
 }

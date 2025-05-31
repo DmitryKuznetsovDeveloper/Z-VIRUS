@@ -1,22 +1,24 @@
 ﻿namespace FSM
 {
-    public interface IEnterable
+    public interface IEnterable: IState
     {
         void Enter();
     }
 
-    public interface IExitable
+    public interface IExitable: IState
     {
         void Exit();
     }
 
-    public interface ITickableState
+    public interface ITickableState: IState
     {
         void Tick();
     }
 
-    public interface ITransitionCondition
+    public interface ITransitionCondition : IState
     {
         bool CanEnter();
     }
+    
+    public interface IState {}
 }

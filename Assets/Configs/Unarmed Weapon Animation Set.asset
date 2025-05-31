@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5036fb40c924f079e56cf0764cc976f, type: 3}
+  m_Name: Unarmed Weapon Animation Set
+  m_EditorClassIdentifier: 
+  Idle: {fileID: -203655887218126122, guid: 7394da38f5a497d46a0cea09fe925cef, type: 3}
+  Walk: {fileID: 11400000, guid: d9a0bcb6e7df8e049a9cf53a020b0692, type: 2}
+  Run: {fileID: 11400000, guid: ccaa6f8d52642144e87d174ac24eeb3b, type: 2}
+  Attacks:
+  - {fileID: -203655887218126122, guid: fdb29621f3f9ba648a482786cedb7087, type: 3}
+  - {fileID: -203655887218126122, guid: e703a917b0ebe30438179553d2554b17, type: 3}
+  - {fileID: -203655887218126122, guid: 6031640a1545d384c86849f74c9f8eca, type: 3}
+  - {fileID: -203655887218126122, guid: bbf76a28ccb788744af169fd9226731c, type: 3}
+  UpperBodyMask: {fileID: 31900000, guid: 2cc48b3158160a64fa009cba9aaf64b9, type: 2}
+  ComboResetTime: 1
