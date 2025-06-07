@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
-namespace Azur.TowerDefense.Utils
+namespace Utils
 {
     public static class DebugUtil
     {

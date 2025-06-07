@@ -1,8 +1,8 @@
 ﻿using System;
 using Core;
-using R3;
+using Cysharp.Threading.Tasks;
 using UI.Views;
-using UnityEngine;
+using Utils;
 using Zenject;
 
 namespace UI.Mediators
@@ -12,10 +12,6 @@ namespace UI.Mediators
         private readonly SceneLoader _sceneLoader;
         private readonly MainMenuView _mainMenuView;
         private readonly GameExitService _gameExitService;
-        
-        private IDisposable _startGameSub;
-        private IDisposable _settingSub;
-        private IDisposable _exitSub;
 
         public MainMenuMediator(SceneLoader sceneLoader, MainMenuView mainMenuView, GameExitService gameExitService)
         {
@@ -25,26 +21,20 @@ namespace UI.Mediators
         }
 
         public void Initialize()
-        {
-            _startGameSub = _mainMenuView.StartGameButton.OnClickAsObservable()
-                .ThrottleFirst(TimeSpan.FromMilliseconds(250))
-                .SubscribeAwait(async (_, ct) => await _sceneLoader.LoadWithLoadingScreen(SceneNames.Gameplay)
-                );
+        { 
+            _mainMenuView.StartGameButton.onClick.AddListener(OnStartClicked);
+            _mainMenuView.SettingButton.onClick.AddListener((() => DebugUtil.Log("Settings Open"))); 
+            _mainMenuView.ExitButton.onClick.AddListener(_gameExitService.Exit);
 
-            _settingSub = _mainMenuView.SettingButton.OnClickAsObservable()
-                .ThrottleFirst(TimeSpan.FromMilliseconds(250))
-                .Subscribe(_ => Debug.Log("Open Settings Popup"));
-                
-            _exitSub = _mainMenuView.ExitButton.OnClickAsObservable()
-                .ThrottleFirst(TimeSpan.FromMilliseconds(250))
-                .Subscribe(_ => _gameExitService.Exit());
         }
         
         public void Dispose()
         {
-            _startGameSub?.Dispose();
-            _settingSub?.Dispose();
-            _exitSub?.Dispose();
+            _mainMenuView.StartGameButton.onClick.RemoveListener(OnStartClicked);
+            _mainMenuView.SettingButton.onClick.RemoveListener((() => DebugUtil.Log("Settings Open"))); 
+            _mainMenuView.ExitButton.onClick.RemoveListener(_gameExitService.Exit);
         }
+        
+        private void OnStartClicked() => _sceneLoader.LoadWithLoadingScreen(SceneNames.Gameplay).Forget();
     }
 }

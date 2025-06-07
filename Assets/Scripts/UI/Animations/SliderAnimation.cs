@@ -1,5 +1,4 @@
 using DG.Tweening;
-using TMPro;
 using UnityEngine;
 
 namespace UI.Animations
@@ -23,7 +22,15 @@ namespace UI.Animations
 
         private Sequence _sequence;
 
-        private void Awake()
+        private void Awake() => InitSequence();
+        
+        private void OnEnable() => _sequence?.Restart();
+
+        private void OnDisable() => _sequence?.Rewind();
+
+        private void OnDestroy() => _sequence?.Kill();
+        
+        private void InitSequence()
         {
             _sequence = DOTween.Sequence().SetUpdate(true).SetAutoKill(false).SetEase(_easeSlider).SetLoops(-1, LoopType.Restart);
             _sequence.SetLink(gameObject);
@@ -42,11 +49,5 @@ namespace UI.Animations
             _sequence.SetAutoKill(false);
             _sequence.Pause();
         }
-
-        private void OnEnable() => _sequence?.Restart();
-
-        private void OnDisable() => _sequence?.Rewind();
-
-        private void OnDestroy() => _sequence?.Kill();
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Core;
-using Input;
 using UnityEngine;
 using Zenject;
 
@@ -12,7 +11,6 @@ namespace Installers
         {
             Container.Bind<SceneLoader>().AsSingle();
             Container.Bind<GameExitService>().AsSingle();
-            Container.BindInterfacesTo<CharacterInputActions>().AsSingle();
         }
     }
 }

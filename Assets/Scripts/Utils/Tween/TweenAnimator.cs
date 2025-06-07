@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using Azur.TowerDefense.Utils;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
@@ -136,7 +135,7 @@ namespace Utils.Tween
         {
             if (!Animations.TryGetValue(animatorContainer.MainAnimation, out var sequence))
             {
-                Debug.LogWarning("TweenAnimator: missing animation hash " + animatorContainer.MainAnimation);
+                DebugUtil.LogWarning("TweenAnimator: missing animation hash " + animatorContainer.MainAnimation);
                 return;
             }
 

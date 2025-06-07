@@ -85,8 +85,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2483746628043911083}
   - component: {fileID: 3894811291841125620}
-  - component: {fileID: 7321477335487708000}
-  - component: {fileID: 3317627472054157074}
+  - component: {fileID: 8419193046005040016}
+  - component: {fileID: 7933213516531752218}
   m_Layer: 5
   m_Name: BtnDefaul
   m_TagString: Untagged
@@ -158,7 +158,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &7321477335487708000
+--- !u!114 &8419193046005040016
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -167,22 +167,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1361790235578152042}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96a431326c954581b917a0b4255d9ed7, type: 3}
+  m_Script: {fileID: 11500000, guid: b5bc39a002cd4458aab14cac908e6ab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bg: {fileID: 6002870749597814558}
-  _frame: {fileID: 5190882237866055506}
-  _text: {fileID: 1798257286120198287}
-  _style:
-    PressedScale: 0.96
-    AnimationDuration: 0.1
-    BgNormal: {r: 0.101960786, g: 0.101960786, b: 0.101960786, a: 0.5019608}
-    BgPressed: {r: 1, g: 0.627451, b: 0, a: 0.5019608}
-    FrameNormal: {r: 0.17254902, g: 0.17254902, b: 0.17254902, a: 1}
-    FramePressed: {r: 1, g: 0.627451, b: 0, a: 1}
-    TextNormal: {r: 1, g: 1, b: 1, a: 1}
-    TextPressed: {r: 1, g: 0.34117648, b: 0.13333334, a: 1}
---- !u!114 &3317627472054157074
+  _animationCollection: {fileID: 11400000, guid: 9ac7aeb32dbee204cb236e6938fbded2, type: 2}
+  Bg: {fileID: 6002870749597814558}
+  Frame: {fileID: 5190882237866055506}
+  Text: {fileID: 1798257286120198287}
+  Root: {fileID: 6426980413054645772}
+--- !u!114 &7933213516531752218
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,16 +184,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1361790235578152042}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fc77297cfe52f14a9f1f45a6634e95f, type: 3}
+  m_Script: {fileID: 11500000, guid: 63f86a49761d40b7b67b44968382f850, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _root: {fileID: 6426980413054645772}
-  _rootCanvasGroup: {fileID: 5367201372944335142}
-  _isShowOnEnable: 0
-  _fromPosition: {x: -250, y: 0}
-  _endPosition: {x: 0, y: 0}
-  _duration: 2
-  _ease: 9
 --- !u!1 &1843447669847381236
 GameObject:
   m_ObjectHideFlags: 0
